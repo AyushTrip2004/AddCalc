@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block body %}
+<div class="container my-2">
+<h2 class="my-4 text-center"><u>Basic Calculator</u></h2>
+<form action="/result">
+  <div class="form-group">
+    <label for="fnum">First Number</label>
+    <input type="number" class="form-control my-2" name="fnum" id="fnum" aria-describedby="fnum">
+  </div>
+  <div class="form-group">
+    <label for="snum">Second Number</label>
+    <input type="number" class="form-control my-2" name="snum" id="snum" aria-describedby="snum">
+  </div>
+  <div class="form-group">
+    <label for="operations">Select an Operation</label>
+  <select class="form-select my-2" aria-label="operations" name="operations" id="operations">
+    <option selected>+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+{% if user.is_authenticated %}
+    <option value="//">//</option>
+    <option value="%">%</option>
+{% else %}
+    <option value="//" disabled>//</option>
+    <option value="%" disabled>%</option>
+{% endif %}
+  </select>
+  </div>
+  <button type="submit" class="btn btn-primary my-3">Submit</button>
+
+<div class="container my-2">
+  <h2><u>Meaning of each operations</u></h2>
+  <ul>
+  <li><b>(+) means Plus</b></li>
+  <li><b>(-) means Minus</b></li>
+  <li><b>(*) means Multiplication</b></li>
+  <li><b>(/) means Divison</b></li>
+  
+{% if user.is_authenticated %}
+  <li><b>(//) means Floor Divison</b></li>
+  <li><b>(%) means Modulus</b></li>
+{% else %}
+  <li><b>To Access Other Operations, Please Create an Account or Login To Your Account</b></li>
+{% endif %}
+  </ul>
+</div>
+</form>
+</div>
+{% endblock body %}
